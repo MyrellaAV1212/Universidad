@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Pest</title>
+<link rel="shortcut icon" href="/imagenes/icono.png" type="image/png"></link>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/persona.js}"></script>
+
+
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<div class="content-wrapper-calidad">
+				<div class="container-fluid">
+					<div class="card card-register mx-auto mt-5">
+
+						<div class="container">
+							<div>
+								<div class="font-weight-bold" align="center">
+									<font size=6> Registro del Mascota</font>
+								</div>
+								<form th:action="@{/pet/registrar}" th:object="${pet}"
+									method="post" enctype="multipart/form-data">
+									<div class="form-group row">
+
+										<form th:action="@{/pet/registrar}" method="post"
+											th:object="${pet}">
+											<div class="form-group">
+												<label for="idhost">ID:</label> <input type="text"
+													class="form-control" th:field="*{idPet}"></input>
+											</div>
+
+											<div class="form-group">
+												<label for="nombre">NOMBRE:</label> <input type="text"
+													th:field="*{namePet}" class="form-control" id="nombre"></input>
+												<div class="alert alert-danger"
+													th:if="${#fields.hasErrors('namePet')}"
+													th:errors="*{namePet}"></div>
+
+											</div>
+
+											<div class="form-group">
+												<label for="fechanacimiento">FECHA DE NACIMIENTO:</label> <input
+													type="date" th:field="*{birthDatePet}" class="form-control"
+													id="fechanacimiento"></input>
+												<div class="alert alert-danger"
+													th:if="${#fields.hasErrors('birthDatePet')}"
+													th:errors="*{birthDatePet}"></div>
+
+											</div>
+
+											<div class="form-group">
+												<label for="tipo">TIPO:</label> <input type="text"
+													class="form-control" th:field="*{tipoPet}" id="tipo"></input>
+												<div class="alert alert-danger"
+													th:if="${#fields.hasErrors('tipoPet')}"
+													th:errors="*{tipoPet}"></div>
+
+											</div>
+
+											<div class="form-group">
+												<label for="raza">RAZA:</label> <input type="text"
+													class="form-control" th:field="*{razaPet}" id="raza"></input>
+												<div class="alert alert-danger"
+													th:if="${#fields.hasErrors('razaPet')}"
+													th:errors="*{razaPet}"></div>
+
+											</div>
+
+											<div class="form-group">
+												<label for="edad">EDAD:</label> <input type="text"
+													class="form-control" th:field="*{edadPet}" id="edad"></input>
+												<div class="alert alert-danger"
+													th:if="${#fields.hasErrors('edadPet')}"
+													th:errors="*{edadPet}"></div>
+
+											</div>
+
+											<div class="form-group row">
+												<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+												<div class="col-sm-6">
+													<input type="file" name="file" class="form-control"
+														th:text="${pet.foto}" required="required" />
+												</div>
+
+											</div>
+
+											<div class="form-group row">
+												<label for="dueno" class=" col-sm-2 col-form-label">Due&ntilde;o:</label>
+												<div class="col-sm-6">
+													<select class="form-control" th:field="*{dueno.idDueno}">
+														<option th:each="p: ${listaDuenos}"
+															th:value="${p.idDueno}" th:text="${p.nameDueno}"
+															th:selected="(${p.idDueno} == *{dueno.idDueno})"></option>
+													</select>
+												</div>
+											</div>
+
+
+											<button type="submit" class="btn btn-primary"
+												enctype="multipart/form-data">Aceptar</button>
+											<a href="/host/listar" class="btn btn-danger">Cancelar</a>
+
+										</form>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
