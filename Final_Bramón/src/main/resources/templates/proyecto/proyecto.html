@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Proyecto</div>
+			<form th:action="@{/proyectos/guardar}" th:object="${proyecto}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idProyecto" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idProyecto}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idProyecto')}"
+							th:errors="*{idProyecto}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="proyecto" class="col-sm-2 col-form-label">Nombre</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreProyecto}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombreProyecto')}"
+							th:errors="*{nombreProyecto}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{descripcionProyecto}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('descripcionProyecto')}"
+							th:errors="*{descripcionProyecto}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="sueldo" class="col-sm-2 col-form-label">Sueldo</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{sueldoProyecto}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('sueldoProyecto')}"
+							th:errors="*{sueldoProyecto}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="fechaProyecto" class="col-sm-2 col-form-label">Fecha
+						de Proyecto</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fechaProyecto}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaProyecto')}"
+							th:errors="*{fechaProyecto}"></small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="tipoProyecto" class=" col-sm-2 col-form-label">Tipo</label>
+					<div class="col-sm-6">
+						<select class="form-control" name="tipoProyecto">
+
+							<option>Sistemas</option>
+							<option>Software</option>
+							<option>Ciencias de Computación</option>
+
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/proyectos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

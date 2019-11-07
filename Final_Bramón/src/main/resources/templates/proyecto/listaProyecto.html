@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a style="border-bottom-color: green" th:href="@{/proyectos/nuevo}"
+				id="add-row" type="button" class="btn btn-primary btn-md left-block">
+				<span class="glyphicon glyphicon-plus"></span>
+			</a>
+		</div>
+		<div>
+			<form th:action="@{/proyectos/buscar}" method="post"
+				th:object="${proyecto}">
+				<div class="form-group">
+
+					<label for="p">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreProyecto}" id="p"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+						<a href="/proyectos/listar" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Proyectos</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Proyecto</th>
+								<th>Descripción</th>
+								<th>Sueldo</th>
+								<th>Tipo</th>
+								<th>Fecha de Proyecto</th>
+								
+							</tr>
+						</thead>
+						<tbody id="proyecto-list">
+							<tr th:each="proyecto:${listaProyectos}">
+							<td th:text="${proyecto.idProyecto}"></td>
+								<td th:text="${proyecto.nombreProyecto}"></td>
+								<td th:text="${proyecto.descripcionProyecto}"></td>
+								<td th:text="${proyecto.sueldoProyecto}"></td>
+								<td th:text="${proyecto.tipoProyecto}"></td>
+								<td
+									th:text="${#dates.format(proyecto.fechaProyecto,'dd/MM/yyyy')}"></td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<p th:text="${mensaje}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
