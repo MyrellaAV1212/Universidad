@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/clientes/nuevo}"
+				id="add-row" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
+		</div>
+		<div>
+			<form th:action="@{/clientes/buscar}" method="post"
+				th:object="${cliente}">
+				<div class="form-group">
+
+					<label for="cliente">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{datosCliente}" id="cliente"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+						<a href="/clientes/listar" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Clientes</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Cliente</th>
+								<th>Fecha de Nacimiento</th>
+								<th>Email</th>
+								<th>DNI</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="cliente-list">
+							<tr th:each="cliente:${listaClientes}">
+								<td th:text="${cliente.idCliente}"></td>
+								<td th:text="${cliente.datosCliente}"></td>
+								<td
+									th:text="${#dates.format(cliente.fechaNacimientoCliente,'dd/MM/yyyy')}"></td>
+								<td th:text="${cliente.emailCliente}"></td>
+								<td th:text="${cliente.dniCliente}"></td>
+								<td align="center"><a
+									th:href="@{/clientes/eliminar?id=}+${cliente.idCliente}"> <span
+										class="glyphicon glyphicon-trash"></span></a></td>
+								<td align="center"><a
+									th:href="@{'/clientes/detalle/' + ${cliente.idCliente}}"><span
+										class="glyphicon glyphicon-edit"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div th:if="${mensaje}" class="alert alert-info">
+						<p th:text="${mensaje}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

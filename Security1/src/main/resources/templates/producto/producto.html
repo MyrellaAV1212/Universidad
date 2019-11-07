@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Producto</div>
+			<form th:action="@{/productos/guardar}" th:object="${producto}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idProducto" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idProducto}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idProducto')}"
+							th:errors="*{idProducto}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="producto" class="col-sm-2 col-form-label">Producto</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreProducto}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombreProducto')}"
+							th:errors="*{nombreProducto}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="precio" class="col-sm-2 col-form-label">Precio</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{precioProducto}"
+							class="form-control" th:errorclass="'form-control alert-danger'"
+							required="required" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('precioProducto')}"
+							th:errors="*{precioProducto}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="fechaFabricacion" class="col-sm-2 col-form-label">Fecha
+						de Fabricación</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fechaFabricacion}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaFabricacion')}"
+							th:errors="*{fechaFabricacion}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="fechaVencimiento" class="col-sm-2 col-form-label">Fecha
+						de Vencimiento</label>
+					<div class="col-sm-6">
+						<input type="date" th:field="*{fechaVencimiento}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('fechaVencimiento')}"
+							th:errors="*{fechaVencimiento}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="categoria" class=" col-sm-2 col-form-label">Categoria:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{categoria.idCategoria}">
+							<option th:each="c: ${listaCategorias}"
+								th:value="${c.idCategoria}" th:text="${c.nombreCategoria}"
+								th:selected="(${c.idCategoria} == *{categoria.idCategoria})"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+					<div class="col-sm-6">
+						<input type="file" name="file" class="form-control"
+							th:text="${producto.foto}" required="required" />
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/productos/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

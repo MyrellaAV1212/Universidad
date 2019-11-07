@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Productos</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CODIGO</td>
+								<td th:text="${producto.idProducto}"></td>
+							</tr>
+							<tr>
+								<td>Producto</td>
+								<td th:text="${producto.nombreProducto}"></td>
+							</tr>
+							<tr>
+								<td>Precio</td>
+								<td th:text="${producto.precioProducto}"></td>
+							</tr>
+							<tr>
+								<td>Fecha de Fabricación</td>
+								<td th:text="${producto.fechaFabricacion}"></td>
+							</tr>
+							<tr>
+								<td>Fecha de Vencimiento</td>
+								<td th:text="${producto.fechaVencimiento}"></td>
+							</tr>
+							<tr>
+								<td>Categoría</td>
+								<td th:text="${producto.categoria.nombreCategoria}"></td>
+							</tr>
+
+							<tr>
+								<td>FOTO</td>
+								<td><img th:if="${#strings.length(producto.foto)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/productos/upload/' + ${producto.foto}}" th:alt="${producto.foto}" /></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/productos/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
