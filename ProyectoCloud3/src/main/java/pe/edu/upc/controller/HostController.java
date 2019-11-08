@@ -35,7 +35,7 @@ public class HostController {
 	@GetMapping("/nuevo")
 	public String nuevoHost(Model model) {
 		model.addAttribute("host", new Host());
-		return "host/host";
+		return "/host";
 	}
 	
 	
@@ -44,7 +44,7 @@ public class HostController {
 			SessionStatus status) throws ParseException {
 		if (binRes.hasErrors()) {
 
-			return "/host/host";
+			return "/host";
 		} else {
 			host.setPasswordUsuario(personaEncryp.getPasswordEncoder2().encode(host.getPasswordUsuario()));
 			hService.insertar(host);
@@ -63,7 +63,7 @@ public class HostController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/host/listaHost";
+		return "/listaHost";
 	}
 
 	@GetMapping("/detalle/{id}")
@@ -83,7 +83,7 @@ public class HostController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/host/host";
+		return "/host";
 	}
 	
 	@RequestMapping("/buscar")
@@ -107,7 +107,7 @@ public class HostController {
 			model.put("mensaje", "No se encontró");
 		}
 		model.put("listaHosts", listaHosts);
-		return "host/listaHost";
+		return "/listaHost";
 
 	}
 	
@@ -122,7 +122,7 @@ public class HostController {
 			model.addAttribute("listaHosts", hService.listar());
 
 			model.addAttribute("host", objPr.get());
-			return "host/host";
+			return "/host";
 		}
 	}
 	@RequestMapping("/eliminar")

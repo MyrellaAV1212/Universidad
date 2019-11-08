@@ -48,7 +48,7 @@ public class PetController {
 	public String nuevoPet(Model model) {
 		model.addAttribute("pet", new Pet());
 		model.addAttribute("listaDuenos", dService.listar());
-		return "pet/pet";
+		return "/pet";
 	}
 
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -74,7 +74,7 @@ public class PetController {
 			throws ParseException {
 		if (binRes.hasErrors()) {
 
-			return "/pet/pet";
+			return "/pet";
 		} else {
 			if (!foto.isEmpty()) {
 
@@ -110,7 +110,7 @@ public class PetController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/pet/listaPet";
+		return "/listaPet";
 	}
 
 	@GetMapping("/detalle/{id}")
@@ -130,7 +130,7 @@ public class PetController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/pet/pet";
+		return "/pet";
 	}
 
 	@GetMapping(value = "/ver/{id}")
@@ -144,7 +144,7 @@ public class PetController {
 
 		model.put("pet", pet.get());
 
-		return "pet/verPet";
+		return "/verPet";
 	}
 
 	@RequestMapping("/buscar")
@@ -168,7 +168,7 @@ public class PetController {
 			model.put("mensaje", "No se encontró");
 		}
 		model.put("listaPets", listaPets);
-		return "pet/listaPet";
+		return "/listaPet";
 
 	}
 
@@ -183,7 +183,7 @@ public class PetController {
 			model.addAttribute("listaDuenos", dService.listar());
 
 			model.addAttribute("pet", objPet.get());
-			return "pet/pet";
+			return "/pet";
 		}
 	}
 	@RequestMapping("/eliminar")
