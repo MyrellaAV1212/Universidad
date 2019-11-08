@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			
+		</div>
+		<div>
+			<form th:action="@{/host/buscar}" method="post" th:object="${host}">
+				<div class="form-group">
+
+					<label for="p">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{dniPersona}" id="p"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+						<a href="/host/listar" class="btn btn-danger"><span
+							class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Hosts</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped"
+						id="tab_logic">
+						<thead>
+							<tr>
+								<th class="text-center">CODIGO</th>
+								<th class="text-center">NOMBRE</th>
+								<th class="text-center">APELLIDO</th>
+								<th class="text-center">DNI</th>
+								<th class="text-center">CELULAR</th>
+								<th class="text-center">FECHA DE NACIMIENTO</th>
+								<th class="text-center">EMAIL</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="rac: ${listaHosts}">
+								<td th:text="${rac.idPersona}"></td>
+								<td th:text="${rac.namePersona}"></td>
+								<td th:text="${rac.DireccionPersona}"></td>
+								<td th:text="${rac.dniPersona}"></td>
+								<td th:text="${rac.TelPersona}"></td>
+								<td
+									th:text="${#dates.format(rac.birthDatePersona,'dd/MM/yyyy')}"></td>
+								<td th:text="${rac.emailPersona}"></td>
+								<td><a th:href="@{/host/eliminar?id=}+${rac.idPersona}">Eliminar</a></td>
+								<td align="center"><a
+									th:href="@{'/host/modificar/' + ${rac.idPersona}}">Modificar</a></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<p th:text="${mensaje}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

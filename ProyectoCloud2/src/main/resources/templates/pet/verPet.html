@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Mascotas</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped"
+						id="tab_logic">
+
+						<tbody>
+							<tr>
+								<td>CODIGO</td>
+								<td th:text="${pet.idPet}"></td>
+							</tr>
+							<tr>
+								<td>NOMBRE DE MASCOTA</td>
+								<td th:text="${pet.namePet}"></td>
+							</tr>
+							<tr>
+								<td>RAZA</td>
+								<td th:text="${pet.razaPet}"></td>
+							</tr>
+							<tr>
+								<td>TIPO</td>
+								<td th:text="${pet.tipoPet}"></td>
+							</tr>
+							<tr>
+								<td>EDAD</td>
+								<td th:text="${pet.edadPet}"></td>
+							</tr>
+							<tr>
+								<td>FECHA DE NACIMIENTO</td>
+								<td th:text="${pet.birthDatePet}"></td>
+							</tr>
+							<tr>
+								<td>FOTO</td>
+								<td><img th:if="${#strings.length(pet.foto)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/pet/uploads/' + ${pet.foto}}" th:alt="${pet.foto}" /></td>
+							</tr>
+							<tr>
+								<td>DUENO</td>
+								<td th:text="${pet.dueno.namePersona}"></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/pet/listar}" type="button" class="btn btn-primary k">
+						<span class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

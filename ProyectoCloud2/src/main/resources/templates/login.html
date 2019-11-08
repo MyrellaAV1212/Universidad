@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>GAMEZONE</title>
+<link rel="icon" type="image/ico" href="/imagenes1/logo.ico" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"></link>
+
+<link rel="stylesheet" th:href="@{/css1/login.css}"></link>
+</head>
+<body>
+
+	<div class="login-box">
+
+		<img alt="login" th:src="@{/imagenes1/login.jpeg}"></img>
+		<div>
+			<div class="form-login">
+				<p class="alert alert-danger" th:if="${error}" th:text="${error}"></p>
+				<p class="alert alert-success" th:if="${msg}" th:text="${msg}"></p>
+				<br></br>
+				<h4>BIENVENIDO A GAMEZONE</h4>
+				<form th:action="@{j_spring_security_check}" method="post">
+
+					<p>Usuario</p>
+					<input type="text" id="username" name="usuario"
+						class="form-control input-sm chat-input" placeholder="usuario"></input>
+					
+					<p>Password</p>
+					<input type="password" id="password" name="clave"
+						class="form-control input-sm chat-input" placeholder="password"></input>
+					
+					<p></p>
+
+
+					<div class="wrapper">
+						<span class="group-btn"> <input type="submit"
+							value="Ingresar" class="btn btn-primary btn-md" />
+
+						</span>
+						<p>Registrate</p>
+						<a class="nav-link" href="#about" th:href="@{/dueno/nuevo/}">Dueño</a>
+						<a class="nav-link" href="#about" th:href="@{/host/nuevo/}">Host</a>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

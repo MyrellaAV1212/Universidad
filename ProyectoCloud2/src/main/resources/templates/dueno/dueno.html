@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de Dueno</div>
+			<form th:action="@{/dueno/guardar}" th:object="${dueno}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idPersona" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idPersona}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idPersona')}"
+							th:errors="*{idPersona}"></small>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="nombre">NOMBRE:</label> <input type="text"
+						th:field="*{namePersona}" class="form-control" id="nombre"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('namePersona')}"
+						th:errors="*{namePersona}"></div>
+
+				</div>
+				<div class="form-group">
+					<label for="direccion">DIRECCION:</label> <input type="text"
+						th:field="*{DireccionPersona}" class="form-control" id="direccion"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('DireccionPersona')}"
+						th:errors="*{DireccionPersona}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="fechanacimiento">FECHA DE NACIMIENTO:</label> <input
+						type="date" th:field="*{birthDatePersona}" class="form-control"
+						id="fechanacimiento"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('birthDatePersona')}"
+						th:errors="*{birthDatePersona}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="dni">DNI:</label> <input type="text"
+						class="form-control" th:field="*{dniPersona}" id="dni" />
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('dniPersona')}"
+						th:errors="*{dniPersona}"></div>
+
+				</div>
+				<div class="form-group">
+					<label for="direccion">EMAIL:</label> <input type="email"
+						class="form-control" th:field="*{emailPersona}" id="direccion"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('emailPersona')}"
+						th:errors="*{emailPersona}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="celular">CELULAR:</label> <input type="text"
+						class="form-control" th:field="*{TelPersona}" id="celular"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('TelPersona')}"
+						th:errors="*{TelPersona}"></div>
+
+				</div>
+
+				<div class="form-group row">
+					<label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{userUsuario}" id="usuario"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small th:if="${#fields.hasErrors('userUsuario')}"
+							th:errors="*{userUsuario}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="contraseña" class="col-sm-2 col-form-label">Contraseña</label>
+					<div class="col-sm-6">
+						<input type="password" th:field="*{passwordUsuario}"
+							id="contraseña" placeholder="password" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							th:if="${#fields.hasErrors('passwordUsuario')}"
+							th:errors="*{passwordUsuario}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="tipoUsuario" class=" col-sm-2 col-form-label">Tipo
+						de usuario</label>
+					<div class="col-sm-6">
+						<select class="form-control" name="tipoUsuario">
+
+							<option>ROLE_DUENO</option>
+
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="estadoUsuario" class=" col-sm-2 col-form-label">Estado</label>
+					<div class="col-sm-6">
+						<select class="form-control" name="estadoUsuario">
+
+							<option>1</option>
+							<option>0</option>
+
+
+						</select>
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/dueno/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

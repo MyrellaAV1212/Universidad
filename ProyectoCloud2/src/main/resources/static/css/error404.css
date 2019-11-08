@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+
+body {
+	margin: 0;
+	padding: 0;
+	background-image: url(../imagenes1/horror3.jpg);
+	background-size: cover;
+	font-family: sans-serif;
+}
+
+.error-box {
+	width: 700px;
+	height: 480px;
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	top: 20%;
+	left: 25%;
+	position: absolute;
+	transform: translade(-50%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+
+.error-box img {
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	left: 280px;
+}
+
+h5 {
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: left;
+	font-size: 75px;
+	color: white;
+}
+.error-box a{
+	text-decoration: none; 
+	font-size: 30px;
+	color: #fff;
+	
+}
+
+.error-box a:hover {
+	color: #39dc79;
+	
+}

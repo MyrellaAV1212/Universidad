@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Mascotas</div>
+			<form th:action="@{/pet/guardar}" th:object="${pet}" method="post"
+				enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idPet" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idPet}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('idPet')}" th:errors="*{idPet}"></small>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="nombre">NOMBRE:</label> <input type="text"
+						th:field="*{namePet}" class="form-control" id="nombre"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('namePet')}" th:errors="*{namePet}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="fechanacimiento">FECHA DE NACIMIENTO:</label> <input
+						type="date" th:field="*{birthDatePet}" class="form-control"
+						id="fechanacimiento"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('birthDatePet')}"
+						th:errors="*{birthDatePet}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="tipo">TIPO:</label> <input type="text"
+						class="form-control" th:field="*{tipoPet}" id="tipo"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('tipoPet')}" th:errors="*{tipoPet}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="raza">RAZA:</label> <input type="text"
+						class="form-control" th:field="*{razaPet}" id="raza"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('razaPet')}" th:errors="*{razaPet}"></div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="edad">EDAD:</label> <input type="text"
+						class="form-control" th:field="*{edadPet}" id="edad"></input>
+					<div class="alert alert-danger"
+						th:if="${#fields.hasErrors('edadPet')}" th:errors="*{edadPet}"></div>
+
+				</div>
+
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label ">Foto:</label>
+					<div class="col-sm-6">
+						<input type="file" name="file" class="form-control"
+							th:text="${pet.foto}" required="required" />
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+					<label for="dueno" class=" col-sm-2 col-form-label">Due&ntilde;o:</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{dueno.idPersona}">
+							<option th:each="p: ${listaDuenos}" th:value="${p.idPersona}"
+								th:text="${p.namePersona}"
+								th:selected="(${p.idPersona} == *{dueno.idPersona})"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/pet/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<p th:text="${mensaje}"></p>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+
+</body>
+</html>

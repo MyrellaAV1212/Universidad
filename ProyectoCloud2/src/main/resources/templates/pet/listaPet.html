@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a style="border-bottom-color: green" th:href="@{/pet/nuevo}"
+				id="add-row" type="button" class="btn btn-primary btn-md left-block">
+				<span class="glyphicon glyphicon-plus"></span>
+			</a>
+		</div>
+		<div>
+			<form th:action="@{/pet/buscar}" method="post" th:object="${pet}">
+				<div class="form-group">
+
+					<label for="p">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{namePet}" id="p"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+						<a href="/pet/listar" class="btn btn-danger"><span
+							class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Mascotas</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped"
+						id="tab_logic">
+						<thead>
+							<tr>
+								<th class="text-center">CODIGO</th>
+								<th class="text-center">PET</th>
+								<th class="text-center">BIRTHDATE</th>
+								<th class="text-center">RAZA</th>
+								<th class="text-center">TIPO</th>
+								<th class="text-center">EDAD</th>
+								<th class="text-center">DUENO</th>
+								<th class="text-center">OPERACIÓN</th>
+								<th class="text-center">OPERACIÓN</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p: ${listaPets}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/pet/ver/} + ${p.idPet}" th:text="${p.idPet}"></a></td>
+								<td th:text="${p.namePet}"></td>
+								<td th:text="${p.razaPet}"></td>
+								<td th:text="${p.tipoPet}"></td>
+								<td th:text="${p.edadPet}"></td>
+								<td th:text="${#dates.format(p.birthDatePet,'dd/MM/yyyy')}"></td>
+								<td th:text="${p.dueno.namePersona}"></td>
+								<td><a th:href="@{/pet/eliminar?id=}+${p.idPet}">Eliminar</a></td>
+								<td align="center"><a
+									th:href="@{'/pet/modificar/' + ${p.idPet}}">Modificar</a></td>
+
+							</tr>
+						</tbody>
+
+					</table>
+					<p th:text="${mensaje}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
