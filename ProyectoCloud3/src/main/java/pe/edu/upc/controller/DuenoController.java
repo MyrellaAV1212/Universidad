@@ -35,7 +35,7 @@ public class DuenoController {
 	@GetMapping("/nuevo")
 	public String nuevoDuenio(Model model) {
 		model.addAttribute("dueno", new Dueno());
-		return "/dueno";
+		return "dueno";
 	}
 	
 	
@@ -44,7 +44,7 @@ public class DuenoController {
 			SessionStatus status) throws ParseException {
 		if (binRes.hasErrors()) {
 
-			return "/dueno";
+			return "dueno";
 		} else {
 			dueno.setPasswordUsuario(personaEncryp.getPasswordEncoder2().encode(dueno.getPasswordUsuario()));
 			pService.insertar(dueno);
@@ -63,7 +63,7 @@ public class DuenoController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/listaDueno";
+		return "listaDueno";
 	}
 
 	@GetMapping("/detalle/{id}")
@@ -83,7 +83,7 @@ public class DuenoController {
 			model.addAttribute("error", e.getMessage());
 		}
 
-		return "/dueno";
+		return "dueno";
 	}
 	
 	@RequestMapping("/buscar")
@@ -107,7 +107,7 @@ public class DuenoController {
 			model.put("mensaje", "No se encontró");
 		}
 		model.put("listaDuenos", listaDuenos);
-		return "/listaDueno";
+		return "listaDueno";
 
 	}
 	
@@ -122,7 +122,7 @@ public class DuenoController {
 			model.addAttribute("listaDuenos", pService.listar());
 
 			model.addAttribute("dueno", objPr.get());
-			return "/dueno";
+			return "dueno";
 		}
 	}
 	
